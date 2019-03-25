@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PostCreator</string>
+
+    <string name="toolbar_title">Новая запись</string>
+    <string name="message_text_placeholder">Что у Вас нового?</string>
+    <string name="save_button_label">Сохранить</string>
+</resources>

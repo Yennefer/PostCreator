@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#E0E0E0</color>
+    <color name="vk_blue">#528BCC</color>
+    <color name="vk_light_blue">#D6E3F3</color>
+
+    <!-- Background colors -->
+    <color name="blue_start">#31EDD3</color>
+    <color name="blue_end">#2E7CE5</color>
+    <color name="green_start">#C6E445</color>
+    <color name="green_end">#4DB547</color>
+    <color name="orange_start">#FFC833</color>
+    <color name="orange_end">#FF8545</color>
+    <color name="red_start">#FF3355</color>
+    <color name="red_end">#9E116A</color>
+    <color name="purple_start">#F5A5FE</color>
+    <color name="purple_end">#726FDA</color>
+</resources>

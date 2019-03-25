@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_icon_size">24dp</dimen>
+
+    <dimen name="divider_thickness">1dp</dimen>
+
+    <dimen name="thumb_size">32dp</dimen>
+    <dimen name="thumb_corner_big_radius">6dp</dimen>
+    <dimen name="thumb_corner_small_radius">4dp</dimen>
+    <dimen name="thumb_padding">-2dp</dimen>
+    <dimen name="thumb_width">2dp</dimen>
+
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+</resources>

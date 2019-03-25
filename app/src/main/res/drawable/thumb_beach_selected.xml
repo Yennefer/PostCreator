@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="@dimen/thumb_corner_small_radius"
+          android:top="@dimen/thumb_corner_small_radius"
+          android:right="@dimen/thumb_corner_small_radius"
+          android:bottom="@dimen/thumb_corner_small_radius"
+          android:drawable="@drawable/thumbnail_beach" />
+    <item android:drawable="@drawable/thumb_frame" />
+</layer-list>
