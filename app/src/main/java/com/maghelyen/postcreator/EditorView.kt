@@ -10,11 +10,14 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-
+import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 
 class EditorView : FrameLayout {
     private lateinit var imageView: ImageView
@@ -36,13 +39,31 @@ class EditorView : FrameLayout {
         val bitmap = decodeSampledBitmapFromResource(
             resources,
             drawable,
-            1440,
-            1440)
+            imageView.width / 2,
+            imageView.height / 2)
         bitmap?.let {
             imageView.setImageBitmap(bitmap)
         } ?: run {
             imageView.setImageResource(drawable)
         }
+    }
+
+    fun setBackground(filePath: String) {
+        val bitmap = decodeSampledBitmapFromFile(
+            filePath,
+            imageView.width / 2,
+            imageView.height / 2
+        )
+        imageView.setImageBitmap(bitmap)
+    }
+
+    fun setBackground(stream: InputStream) {
+        val bitmap = decodeSampledBitmapFromStream(
+            stream,
+            imageView.width / 2,
+            imageView.height / 2
+        )
+        imageView.setImageBitmap(bitmap)
     }
 
     fun save() {
@@ -69,6 +90,7 @@ class EditorView : FrameLayout {
         // Raw height and width of image
         val height = options.outHeight
         val width = options.outWidth
+        options.inPreferredConfig = Bitmap.Config.RGB_565
         var inSampleSize = 1
 
         if (height > reqHeight || width > reqWidth) {
@@ -102,5 +124,40 @@ class EditorView : FrameLayout {
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false
         return BitmapFactory.decodeResource(res, resId, options)
+    }
+
+    private fun decodeSampledBitmapFromFile(
+        path: String,
+        reqWidth: Int, reqHeight: Int
+    ): Bitmap {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(path, options)
+
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight)
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false
+        Log.d("MyLogs", path)
+        return BitmapFactory.decodeFile(path, options)
+    }
+
+    private fun decodeSampledBitmapFromStream(
+        stream: InputStream,
+        reqWidth: Int, reqHeight: Int
+    ): Bitmap {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeStream(stream, null, options)
+
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight)
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false
+        return BitmapFactory.decodeStream(stream, null, options)
     }
 }
