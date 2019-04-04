@@ -1,9 +1,9 @@
 package com.maghelyen.postcreator
 
-import android.support.annotation.DrawableRes
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.RecyclerView
 
 class ThumbnailsAdapter (
     private val thumbButtonData: List<ThumbButtonData>,

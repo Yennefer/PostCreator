@@ -4,17 +4,23 @@
              android:layout_height="match_parent">
 
     <ImageView
-            android:id="@+id/editor_image_view"
+            android:id="@+id/editor_background_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    <EditText
-            android:id="@+id/editor_text_view"
+    <FrameLayout
+            android:id="@+id/editor_stickers_layer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textNoSuggestions"
+            android:layout_height="match_parent" />
+
+    <com.maghelyen.postcreator.views.EditTextWithBackground
+            android:id="@+id/editor_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
+            android:textSize="24sp"
             android:hint="@string/message_text_placeholder"
             android:background="@null" />
 </FrameLayout>

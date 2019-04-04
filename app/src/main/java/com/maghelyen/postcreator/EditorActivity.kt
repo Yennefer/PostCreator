@@ -1,23 +1,22 @@
 package com.maghelyen.postcreator
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearLayoutManager.HORIZONTAL
-import android.support.v7.widget.RecyclerView
 import android.widget.Button
-import android.widget.Toast
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
-import java.net.URI
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+import androidx.recyclerview.widget.RecyclerView
+import com.maghelyen.postcreator.views.EditorView
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 
-class EditorActivity : AppCompatActivity(), ThumbSelectedListener {
-    private val RESULT_LOAD_IMAGE = 1
 
+class EditorActivity : AppCompatActivity(), ThumbSelectedListener, StickerDialogFragment.StickerSelectedListener {
     private lateinit var editor : EditorView
+    private lateinit var stickerDialogFragment: StickerDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +27,25 @@ class EditorActivity : AppCompatActivity(), ThumbSelectedListener {
 
     override fun onThumbSelected(thumbButtonData: ThumbButtonData) {
         editor.setBackground(thumbButtonData.background)
+    }
+
+    override fun onStickerSelected(sticker: Int) {
+        stickerDialogFragment.dismiss()
+        editor.addSticker(sticker)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                val resultUri = result.uri
+                editor.setBackground(resultUri.path)
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                val error = result.error
+            }
+        }
     }
 
     private fun initUI() {
@@ -45,14 +63,28 @@ class EditorActivity : AppCompatActivity(), ThumbSelectedListener {
             ThumbButtonData(R.drawable.thumb_beach, R.drawable.bg_beach, null),
             ThumbButtonData(R.drawable.thumb_stars, R.drawable.bg_stars, null),
             ThumbButtonData(R.drawable.thumb_load, 0, ::loadClicked))
-
         initThumbnailsList(thumbButtons)
 
         // Save button
         findViewById<Button>(R.id.save_button).setOnClickListener {
-            Toast.makeText(this, "SAVE CLICKED", Toast.LENGTH_SHORT).show()
             editor.save()
         }
+
+        // Change font style button
+        findViewById<ImageView>(R.id.toolbar_icon_left).setOnClickListener {
+            editor.nextTextStyle()
+        }
+
+        // Select sticker button
+        findViewById<ImageView>(R.id.toolbar_icon_right).setOnClickListener {
+            stickerDialogFragment.show(
+                supportFragmentManager,
+                stickerDialogFragment.tag
+            )
+        }
+
+        // Stickers dialog
+        stickerDialogFragment = StickerDialogFragment.newInstance(this)
     }
 
     private fun initThumbnailsList(thumbButtonData: List<ThumbButtonData>) {
@@ -69,39 +101,10 @@ class EditorActivity : AppCompatActivity(), ThumbSelectedListener {
     }
 
     private fun loadClicked() {
-        val i = Intent(
-            Intent.ACTION_PICK,
-            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-
-        startActivityForResult(i, RESULT_LOAD_IMAGE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            val selectedImage = data.data
-
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-
-            val cursor = contentResolver.query(
-                selectedImage,
-                filePathColumn, null, null, null
-            )
-
-            cursor.moveToFirst()
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val picturePath = cursor.getString(columnIndex)
-
-            cursor.close()
-
-            val file = File(picturePath)
-
-//            val file = File(data.data.path)
-            val fileInputStream = contentResolver.openInputStream(data.data)
-
-            editor.setBackground(fileInputStream)
-        }
+        CropImage.activity()
+            .setCropShape(CropImageView.CropShape.RECTANGLE)
+            .setAspectRatio(1, 1)
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .start(this)
     }
 }

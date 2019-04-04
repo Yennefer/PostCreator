@@ -10,6 +10,9 @@
     <dimen name="thumb_padding">-2dp</dimen>
     <dimen name="thumb_width">2dp</dimen>
 
+    <dimen name="sticker_default_size">150dp</dimen>
+
     <dimen name="small_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
+    <dimen name="big_margin">24dp</dimen>
 </resources>

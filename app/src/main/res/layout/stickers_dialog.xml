@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="@string/bottom_dialog_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="@dimen/divider_thickness"
+          android:background="@color/light_gray"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stickers_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

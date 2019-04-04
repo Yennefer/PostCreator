@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,10 +7,10 @@
     android:background="?attr/colorPrimary"
     tools:context=".EditorActivity">
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/toolbar_view"
              android:id="@+id/toolbar"/>
 
-    <com.maghelyen.postcreator.EditorView
+    <com.maghelyen.postcreator.views.EditorView
             android:id="@+id/editor_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/backgrounds_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,4 +58,4 @@
                 android:layout_weight="0"
                 style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
