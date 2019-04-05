@@ -8,9 +8,12 @@
     <dimen name="thumb_corner_big_radius">6dp</dimen>
     <dimen name="thumb_corner_small_radius">4dp</dimen>
     <dimen name="thumb_padding">-2dp</dimen>
-    <dimen name="thumb_width">2dp</dimen>
+    <dimen name="thumb_frame_width">2dp</dimen>
 
     <dimen name="sticker_default_size">150dp</dimen>
+    <dimen name="sticker_frame_width">1dp</dimen>
+    <dimen name="sticker_frame_radius">4dp</dimen>
+    <dimen name="sticker_frame_dash">4dp</dimen>
 
     <dimen name="small_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>

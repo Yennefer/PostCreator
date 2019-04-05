@@ -31,8 +31,8 @@ class EditTextWithBackground : EditText {
             paint.strokeCap = Paint.Cap.ROUND
             for (i in 0 until lineCount) {
                 rect.top = layout.getLineTop(i)
-                rect.left = layout.getLineLeft(i).toInt()
-                rect.right = layout.getLineRight(i).toInt()
+                rect.left = layout.getLineLeft(i).toInt() + paddingLeft
+                rect.right = layout.getLineRight(i).toInt() + paddingRight
                 rect.bottom = layout.getLineBottom(i) - if (i + 1 == lineCount) 0 else layout.spacingAdd.toInt()
 
                 canvas?.drawRect(rect, paint)

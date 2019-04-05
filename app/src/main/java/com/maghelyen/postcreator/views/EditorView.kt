@@ -15,6 +15,8 @@ import com.maghelyen.postcreator.R
 import java.io.File
 
 class EditorView : FrameLayout {
+    private var i = 0
+
     enum class TextStyle(val textColor: Int, val backgroundColor: Int?) {
         BLACK(R.color.black, null) {
             override fun next() = WHITE
@@ -77,9 +79,11 @@ class EditorView : FrameLayout {
         val lp = FrameLayout.LayoutParams(
             resources.getDimensionPixelSize(R.dimen.sticker_default_size),
             resources.getDimensionPixelSize(R.dimen.sticker_default_size))
-        lp.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+        lp.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
         stickerView.layoutParams = lp
-        stickerView.setBackgroundResource(R.drawable.abc_ab_share_pack_mtrl_alpha)
+        stickerView.setBackgroundResource(R.drawable.sticker_frame)
+        stickerView.isSelected = true
+
         Glide.with(context)
             .load(sticker)
             .into(stickerView)

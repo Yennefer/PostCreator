@@ -8,7 +8,7 @@
         <shape android:shape="rectangle">
             <corners android:radius = "@dimen/thumb_corner_big_radius" />
             <stroke android:color="?attr/colorPrimary"
-                    android:width="@dimen/thumb_width"/>
+                    android:width="@dimen/thumb_frame_width"/>
         </shape>
     </item>
 </layer-list>
