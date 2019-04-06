@@ -1,7 +1,14 @@
 package com.maghelyen.postcreator.views
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.net.Uri
+import android.os.Environment
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -12,7 +19,13 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.maghelyen.postcreator.R
+import com.muddzdev.viewtobitmaplibrary.OnBitmapSaveListener
+import com.muddzdev.viewtobitmaplibrary.ViewToBitmap
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+import java.lang.Exception
+import java.util.*
 
 class EditorView : FrameLayout {
     private var i = 0
@@ -92,7 +105,65 @@ class EditorView : FrameLayout {
     }
 
     fun save() {
-        Toast.makeText(context, "SAVE CLICKED", Toast.LENGTH_SHORT).show()
+//        val image = ViewToBitmap(this)
+//        image.setOnBitmapSaveListener {
+//                isSaved, path -> Toast.makeText(context, "Bitmap Saved at; $path", Toast.LENGTH_SHORT).show()
+//        }
+//        image.saveToGallery()
+        val path = saveImage(viewToBitmap())
+        Toast.makeText(context, "Bitmap Saved at; $path", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun viewToBitmap(): Bitmap {
+        //Define a bitmap with the same size as the view
+        val returnedBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        //Bind a canvas to it
+        val canvas = Canvas(returnedBitmap)
+        //Get the view's background
+        val bgDrawable = background
+        //has background drawable, then draw it on the canvas
+        bgDrawable.draw(canvas)
+        // draw the view on the canvas
+        draw(canvas)
+        //return the bitmap
+        return returnedBitmap
+    }
+
+    private fun saveImage(bitmap: Bitmap): String? {
+        var savedImagePath: String? = null
+
+        val imageFileName = "JPEG_" + "FILE_NAME" + ".png"
+        val storageDir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString()
+                           + "/YOUR_FOLDER_NAME")
+        var success = true
+        if (!storageDir.exists()) {
+            success = storageDir.mkdirs()
+        }
+        if (success) {
+            val imageFile = File(storageDir, imageFileName)
+            savedImagePath = imageFile.absolutePath
+            try {
+                val fOut = FileOutputStream(imageFile)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
+                fOut.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            // Add the image to the system gallery
+            galleryAddPic(savedImagePath)
+            Toast.makeText(context, "IMAGE SAVED", Toast.LENGTH_LONG).show()
+        }
+        return savedImagePath
+    }
+
+    private fun galleryAddPic(imagePath: String) {
+        val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+        val file = File(imagePath)
+        val contentUri = Uri.fromFile(file)
+        mediaScanIntent.data = contentUri
+        context.sendBroadcast(mediaScanIntent)
     }
 
     private fun init() {
