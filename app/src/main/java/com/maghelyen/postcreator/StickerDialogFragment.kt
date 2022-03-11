@@ -30,6 +30,7 @@ class StickerDialogFragment : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.stickers_dialog, container, false)
 
+        // Init sticker list
         val viewManager = GridLayoutManager(context, COLUMNS_COUNT)
         val viewAdapter = StickersAdapter(createStickersList(), stickerSelectedListener)
 
@@ -76,6 +77,8 @@ class StickerDialogFragment : BottomSheetDialogFragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): StickerViewHolder {
+
+            // Create view for sticker
             val context = parent.context
             val resources = context.resources
             val imageView = ImageView(context)
@@ -101,6 +104,8 @@ class StickerDialogFragment : BottomSheetDialogFragment() {
         ) : RecyclerView.ViewHolder(imageView) {
 
             fun bind(@DrawableRes sticker: Int) {
+
+                // Init sticker view
                 Glide.with(context)
                     .load(sticker)
                     .into(imageView)

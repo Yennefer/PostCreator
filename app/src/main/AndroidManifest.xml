@@ -14,14 +14,17 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".EditorActivity"
-                  android:windowSoftInputMode="stateVisible|adjustResize">
+                  android:screenOrientation="portrait"
+                  android:resizeableActivity="false" tools:targetApi="n"
+                  android:windowSoftInputMode="stateHidden|adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                  android:screenOrientation="portrait"
+                  android:resizeableActivity="false" tools:targetApi="n"
                   android:theme="@style/Base.Theme.AppCompat"/>
-        <!-- optional (needed if default theme has no action bar) -->
     </application>
 </manifest>

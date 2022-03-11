@@ -14,6 +14,8 @@ class ThumbnailsAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): SingleSelectionViewHolder {
+
+        // Create view for thumbnail
         val context = parent.context
         val resources = context.resources
         val thumbnailView = ImageView(context)
@@ -38,6 +40,8 @@ class ThumbnailsAdapter (
     inner class SingleSelectionViewHolder(private val thumbView: ImageView) : RecyclerView.ViewHolder(thumbView) {
 
         fun bind(thumbButtonData: ThumbButtonData) {
+
+            // Init thumbnail view
             thumbView.setImageResource(thumbButtonData.thumbnail)
             thumbView.isSelected = selectedPosition == adapterPosition
             thumbView.setOnClickListener {
@@ -48,10 +52,11 @@ class ThumbnailsAdapter (
                     selectedPosition = adapterPosition
                     thumbView.isSelected = true
 
-                    thumbButtonData.onClickAction?.invoke() ?: run {
+                    if (thumbButtonData.onClickAction == null) {
                         thumbSelectedListener.onThumbSelected(thumbButtonData)
                     }
                 }
+                thumbButtonData.onClickAction?.invoke()
             }
         }
     }

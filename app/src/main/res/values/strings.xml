@@ -5,4 +5,7 @@
     <string name="message_text_placeholder">Что у Вас нового?</string>
     <string name="save_button_label">Сохранить</string>
     <string name="bottom_dialog_title">Стикеры</string>
+    <string name="save_successful_message">Изображение было сохранено на вашем устройстве: %s</string>
+    <string name="save_error_message">При сохранении изображения произошла ошибка</string>
+    <string name="loading_error_message">При загрузке изображения произошла ошибка</string>
 </resources>

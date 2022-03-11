@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/activity_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +20,20 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toTopOf="@id/bottom_bar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" >
+    </com.maghelyen.postcreator.views.EditorView>
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/editor_view"
+            app:layout_constraintBottom_toBottomOf="@id/editor_view"
+            app:layout_constraintStart_toStartOf="@id/editor_view"
+            app:layout_constraintEnd_toEndOf="@id/editor_view"
+            style="?android:attr/progressBarStyle"/>
 
     <View android:layout_width="match_parent"
           android:layout_height="@dimen/divider_thickness"
@@ -56,6 +70,7 @@
                 android:layout_margin="@dimen/small_margin"
                 android:text="@string/save_button_label"
                 android:layout_weight="0"
+                android:enabled="false"
                 style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbar_icon_size">24dp</dimen>
+    <dimen name="toolbar_icon_size">40dp</dimen>
 
     <dimen name="divider_thickness">1dp</dimen>
 
@@ -14,6 +14,9 @@
     <dimen name="sticker_frame_width">1dp</dimen>
     <dimen name="sticker_frame_radius">4dp</dimen>
     <dimen name="sticker_frame_dash">4dp</dimen>
+
+    <dimen name="icon_thrush_size">55dp</dimen>
+    <dimen name="icon_thrush_padding">9dp</dimen>
 
     <dimen name="small_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>

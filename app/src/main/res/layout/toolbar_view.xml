@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentInsetStart="@dimen/medium_margin"
-    app:contentInsetEnd="@dimen/medium_margin"
+    app:contentInsetStart="@dimen/small_margin"
+    app:contentInsetEnd="@dimen/small_margin"
     android:background="@drawable/toolbar_background">
 
     <LinearLayout
@@ -17,6 +17,7 @@
             android:id="@+id/toolbar_icon_left"
             android:layout_width="@dimen/toolbar_icon_size"
             android:layout_height="@dimen/toolbar_icon_size"
+            android:padding="8dp"
             android:src="@drawable/ic_toolbar_font"
             android:layout_weight="0"/>
 
@@ -35,6 +36,7 @@
             android:id="@+id/toolbar_icon_right"
             android:layout_width="@dimen/toolbar_icon_size"
             android:layout_height="@dimen/toolbar_icon_size"
+            android:padding="8dp"
             android:src="@drawable/ic_toolbar_sticker"
             android:layout_weight="0"/>
     </LinearLayout>
